@@ -1,5 +1,6 @@
 const jsonServer = require("json-server");
 const http = require("http");
+const PORT = process.env.PORT || 3000;
 const { graphqlHTTP } = require("express-graphql");
 const { schema, setupRootValue } = require("./src/graphql");
 const { Server } = require("socket.io");
@@ -23,7 +24,7 @@ const db = low(adapter);
 const app = jsonServer.create();
 const router = jsonServer.router(db);
 const middlewares = jsonServer.defaults();
-const port = process.env.PORT || defaultPort;
+// const port = process.env.PORT || defaultPort;
 
 const server = http.createServer(app);
 
@@ -116,6 +117,6 @@ app.use((req, res, next) => {
 app.use(router);
 
 // Start server
-server.listen(port, () => {
-  console.log("Server is running on port " + port);
+server.listen(PORT, () => {
+  console.log("Server is running on port " + PORT);
 });
